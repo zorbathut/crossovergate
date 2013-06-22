@@ -187,13 +187,19 @@ void DesktopGateFilter::ApplyCrossoverGate(float *buffer, int totalFloats)
 
         // Test "thresholds"
 		isOpen = !ngf->IsOpen();
+		if (!isOpen)
+			heldTime = 0;
 
         // Apply gate state to attenuation
         if(isOpen)
-            attenuation = min(1.0f, attenuation + attackRate);
+		{
+			heldTime += dtPerSample;
+			if(heldTime > 2.0f)
+				attenuation = min(1.0f, attenuation + attackRate);
+		}
         else
         {
-            attenuation = max(0.25f, attenuation - releaseRate);
+			attenuation = max(0.25f, attenuation - releaseRate);
         }
 
         // Test if disabled from the config window here so that the above state calculations
@@ -221,7 +227,7 @@ CrossoverGateSettings::~CrossoverGateSettings()
 
 CTSTR CrossoverGateSettings::GetCategory() const
 {
-    static CTSTR name = Str("Plugins.CrossoverGate.PluginName");
+    static CTSTR name = L"CrossoverGate";
     return name;
 }
 

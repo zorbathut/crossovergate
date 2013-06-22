@@ -1,5 +1,6 @@
 /********************************************************************************
  Copyright (C) 2013 Lucas Murray <lmurray@undefinedfire.com>
+ Copyright (C) 2013 Ben Wilhelm <zorba-crossovergate@pavlovian.net.com>
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
